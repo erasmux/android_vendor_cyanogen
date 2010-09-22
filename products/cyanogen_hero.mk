@@ -19,19 +19,19 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_ID=FRF91 BUILD_DISPLAY_ID=FRF91 BUILD_FING
 
 PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/vendor/cyanogen/prelink-linux-arm-hero.map
 
+# Build kernel
+#PRODUCT_SPECIFIC_DEFINES += TARGET_PREBUILT_KERNEL=
+#PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_DIR=kernel-msm
+#PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_CONFIG=hero_defconfig
+
 # Enable Windows Media
 WITH_WINDOWS_MEDIA := true
 
 #
 # Set ro.modversion
 #
-ifdef CYANOGEN_NIGHTLY
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.modversion=CyanogenMod-6-$(shell date +%m%d%Y)-NIGHTLY-Hero
-else
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.modversion=CyanogenMod-6.1.0-RC0-Hero
-endif
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.modversion=FloyoCM-0.8
 
 #
 # Copy passion specific prebuilt files

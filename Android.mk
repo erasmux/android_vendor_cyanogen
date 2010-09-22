@@ -3,3 +3,7 @@
 ifdef CYANOGEN_WITH_GOOGLE
     PACKAGES.Email.OVERRIDES := Provision LatinIME QuickSearchBox
 endif
+
+# Floyo apps removed:
+PACKAGES.Email.OVERRIDES := Provision Protips QuickSearchBox
+

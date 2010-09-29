@@ -45,6 +45,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     CMParts \
     CMPartsHelper \
+    CMStats \
+    FileManager \
     CMWallpapers \
     DSPManager \
     Superuser \
@@ -98,6 +100,7 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/proprietary/Clicker.apk:./system/app/Clicker.apk \
     vendor/cyanogen/proprietary/libt99.so:./system/lib/libt99.so \
     vendor/cyanogen/proprietary/Facebook.apk:./system/app/Facebook.apk \
+    vendor/cyanogen/proprietary/YouTube.apk:./system/app/YouTube.apk \
     vendor/cyanogen/proprietary/GenieWidget.apk:./system/app/GenieWidget.apk \
     vendor/cyanogen/proprietary/Gmail.apk:./system/app/Gmail.apk \
     vendor/cyanogen/proprietary/GoogleBackupTransport.apk:./system/app/GoogleBackupTransport.apk \

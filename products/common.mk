@@ -58,7 +58,7 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/CHANGELOG.mkdn:system/etc/CHANGELOG-CM.txt
 
 # Common CM overlay
-#PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/floyo
+PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/floyo
 PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/common
 
 # Bring in some audio files

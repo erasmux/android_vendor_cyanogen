@@ -66,6 +66,7 @@ include frameworks/base/data/sounds/AudioPackageHtc.mk
 
 PRODUCT_COPY_FILES += \
     vendor/cyanogen/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
+    vendor/cyanogen/prebuilt/common/bin/verify_cache_partition_size.sh:system/bin/verify_cache_partition_size.sh \
     vendor/cyanogen/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf \
     vendor/cyanogen/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf \
     vendor/cyanogen/prebuilt/common/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
@@ -125,7 +126,6 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/proprietary/com.google.android.maps.xml:./system/etc/permissions/com.google.android.maps.xml \
     vendor/cyanogen/proprietary/features.xml:./system/etc/permissions/features.xml \
     vendor/cyanogen/proprietary/com.google.android.maps.jar:./system/framework/com.google.android.maps.jar \
-    vendor/cyanogen/proprietary/libinterstitial.so:./system/lib/libinterstitial.so \
     vendor/cyanogen/proprietary/libspeech.so:./system/lib/libspeech.so \
     vendor/cyanogen/proprietary/libimageutils.so:./system/lib/libimageutils.so \
     vendor/cyanogen/proprietary/libvoicesearch.so:./system/lib/libvoicesearch.so \

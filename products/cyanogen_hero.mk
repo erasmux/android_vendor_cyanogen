@@ -31,7 +31,7 @@ WITH_WINDOWS_MEDIA := true
 # Set ro.modversion
 #
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.modversion=FloyoCM-1.1.7
+	ro.modversion=FloyoCM-1.1.8
 
 #
 # Copy passion specific prebuilt files

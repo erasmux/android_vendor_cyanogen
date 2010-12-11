@@ -4,30 +4,59 @@
 
 BB="logwrapper busybox";
 
+if [ -e /system/bin/log ];
+then
+    LOGI="log -p i -t mountsd --"
+    LOGE="log -p e -t mountsd --"
+else
+    LOGI=echo
+    LOGE=echo
+fi
+
 if [ "$SD_EXT_DIRECTORY" = "" ];
 then
     SD_EXT_DIRECTORY=/sd-ext;
+fi;
+if [ ! -d $SD_EXT_DIRECTORY -a -d /system/sd ];
+then
+    SD_EXT_DIRECTORY=/system/sd;
 fi;
 
 # find first linux partition on SD card
 MMC=/dev/block/mmcblk0
 
 # wait for the device to settle
-COUNT=6;
+COUNT=7;
 until [ -b "$MMC" ] || [ $COUNT -lt 1 ];
 do
+    $LOGI "$MMC not ready, waiting $COUNT seconds..."
     sleep 1;
     COUNT=$((COUNT-1));
 done;
 
-if [ -b "$MMC" ];
+if [ ! -b "$MMC" ];
+then
+    $LOGE "SD not found ($MMC)"
+else
+    if [ ! -d $SD_EXT_DIRECTORY ];
+    then
+        $LOGI "$SD_EXT_DIRECTORY not found, trying to create it...";
+        $BB mkdir -p $SD_EXT_DIRECTORY
+    fi;
+    if [ ! -d $SD_EXT_DIRECTORY ];
+    then
+        $LOGE "failed to create directory for ext partition: $SD_EXT_DIRECTORY ";
+    fi
+fi
+
+if [ -d $SD_EXT_DIRECTORY -a -b "$MMC" ];
 then
     FDISK="busybox fdisk"
     PARTITION=`$FDISK -l $MMC | awk '/^\// && $5 == 83 {print $1;exit;}'`
 
     if [ -b "$PARTITION" ];
     then
-        log -p i -t mountsd "Checking filesystems..";
+        $LOGI "Checking filesystems..";
    
         # fsck the sdcard filesystem first
         if [ -x `which e2fsck` ];
@@ -48,12 +77,12 @@ then
             then
                 $BB chown 1000:1000 $SD_EXT_DIRECTORY;
                 $BB chmod 771 $SD_EXT_DIRECTORY;
-                log -p i -t mountsd "$SD_EXT_DIRECTORY successfully mounted";
+                $LOGI "$SD_EXT_DIRECTORY successfully mounted";
             else
-                log -p e -t mountsd "Unable to mount filesystem for $SD_EXT_DIRECTORY!";
+                $LOGE "Unable to mount filesystem for $SD_EXT_DIRECTORY!";
             fi
         else
-            log -p e -t mountsd "Unable to repair filesystem, disabling apps2sd";
+            $LOGE "Unable to repair filesystem, disabling apps2sd";
         fi
     fi
 fi

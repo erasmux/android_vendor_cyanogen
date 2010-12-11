@@ -100,7 +100,7 @@
 		<PreferenceCategory
             android:title="@string/pref_title_drawer_visuals_preferencecategory">
 			<CheckBoxPreference android:title="@string/pref_title_animated_drawer"
-				android:defaultValue="@bool/config_drawerAnimated"
+				android:defaultValue="true"
 				android:summary="@string/pref_summary_animated_drawer"
 				android:key="drawerAnimated" />
 			<com.android.launcher.DialogSeekBarPreference
@@ -122,13 +122,13 @@
 		    <Preference android:key="drawer_color"
 				android:title="@string/pref_title_drawer_color"
 				android:summary="@string/pref_summary_drawer_color"
-		        android:defaultValue="@integer/config_drawer_color" />
+		        android:defaultValue="-16777216" />
 			<com.android.launcher.DialogSeekBarPreference
 				android:title="@string/pref_title_page_horizontal_margin"
 				android:summary="@string/pref_summary_page_horizontal_margin"
 				android:dialogMessage="@string/pref_dialog_page_horizontal_margin"
 				android:key="pageHorizontalMargin"
-				android:defaultValue="@integer/config_pageHorizontalMargin"
+				android:defaultValue="20"
 				android:max="75" />
 		</PreferenceCategory>
 	</PreferenceScreen>
@@ -225,7 +225,7 @@
 				android:entryValues="@array/main_dock_values"
 				android:entries="@array/main_dock_entries"/>
 			<CheckBoxPreference android:title="@string/pref_title_desktop_dots"
-				android:defaultValue="@bool/config_uiDots"
+				android:defaultValue="true"
 				android:summary="@string/pref_summary_desktop_dots"
 				android:key="uiDots" />
 			<com.android.launcher.DialogSeekBarPreference
@@ -252,7 +252,7 @@
 				android:summary="@string/pref_summary_dockbar"
 				android:key="uiDockbar" />
 			<CheckBoxPreference android:title="@string/pref_title_closing_dockbar"
-				android:defaultValue="@bool/config_uiDockbar"
+				android:defaultValue="false"
 				android:dependency="uiDockbar"
 				android:summary="@string/pref_summary_closing_dockbar"
 				android:key="uiCloseDockbar" />
@@ -266,12 +266,12 @@
 		    <Preference android:key="highlights_color"
 				android:title="@string/pref_title_icon_highlights"
 				android:summary="@string/pref_summary_icon_highlights"
-		        android:defaultValue="@integer/config_highlights_color" />
+		        android:defaultValue="-16777216" />
 		    <Preference android:key="highlights_color_focus"
 		    	android:dependency="uiNewSelectors"
 				android:title="@string/pref_title_icon_highlights_focus"
 				android:summary="@string/pref_summary_icon_highlights_focus"
-		        android:defaultValue="@integer/config_highlights_color_focus" />
+		        android:defaultValue="-16777216" />
 		</PreferenceCategory>
 		<PreferenceCategory
             android:title="@string/pref_title_indicators_preferencecategory">

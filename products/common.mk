@@ -60,6 +60,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/floyo
 PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/common
 
+# Include extra dictionaries for LatinIME
+PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/dictionaries
+
 # Bring in some audio files
 include frameworks/base/data/sounds/AudioPackageHtc.mk
 

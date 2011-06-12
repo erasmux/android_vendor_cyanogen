@@ -106,6 +106,7 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/proprietary/libt99.so:./system/lib/libt99.so \
     vendor/cyanogen/proprietary/Facebook.apk:./system/app/Facebook.apk \
     vendor/cyanogen/proprietary/YouTube.apk:./system/app/YouTube.apk \
+    vendor/cyanogen/proprietary/BooksPhone.apk:./system/app/BooksPhone.apk \
     vendor/cyanogen/proprietary/GenieWidget.apk:./system/app/GenieWidget.apk \
     vendor/cyanogen/proprietary/Gmail.apk:./system/app/Gmail.apk \
     vendor/cyanogen/proprietary/GoogleBackupTransport.apk:./system/app/GoogleBackupTransport.apk \
@@ -132,6 +133,5 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/proprietary/features.xml:./system/etc/permissions/features.xml \
     vendor/cyanogen/proprietary/com.google.android.maps.jar:./system/framework/com.google.android.maps.jar \
     vendor/cyanogen/proprietary/libspeech.so:./system/lib/libspeech.so \
-    vendor/cyanogen/proprietary/libimageutils.so:./system/lib/libimageutils.so \
     vendor/cyanogen/proprietary/libvoicesearch.so:./system/lib/libvoicesearch.so \
-    vendor/cyanogen/proprietary/libzxing.so:./system/lib/libzxing.so
+    vendor/cyanogen/proprietary/libinterstitial.so:./system/lib/libinterstitial.so

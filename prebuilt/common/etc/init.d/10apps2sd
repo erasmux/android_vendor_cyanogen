@@ -1,11 +1,19 @@
 #!/system/bin/sh
 #
-# app2sd v1.0 by erasmux
+# app2sd v1.2 by erasmux
 # moves /data/app and /data/dalvik-cache to the sd ext partition
-# and create symbolic links to their new location.
+# and creates symbolic links to their new location.
 #
+# /data/.dalvik2cache will move dalvik to cache partiton if more
+# then 10M of free space is availble on cache.
+#
+# /data/.noapp2sd will disable app2sd (unrelated to dalvik2sd)
+# /data/.nodalvik2sd will disable dalvik2sd (unrealted to app2sd)
+#
+# on failure check logcat and /data/app2sd.log.
+#
+# Enjoy!
 
-BB="logwrapper busybox";
 ERR_LOG=/data/app2sd.log
 errors=0
 enable=1
@@ -19,7 +27,7 @@ else
     LOGE=echo
 fi
 
-$LOGI "+++ App2SD v1.01 started +++"
+$LOGI "+++ App2SD v1.2 started +++"
 
 if [ -e $ERR_LOG ];
 then
@@ -44,22 +52,24 @@ fi
 for ii in dalvik app private;
 do
   dir=$ii
+  notag=$ii
   if [ "$ii" == "dalvik" ];
   then
       dir=dalvik-cache
   elif [ "$ii" == "private" ];
   then
       dir=app-private
+      notag=app
   fi
   src=/data/$dir
   trg=$SD_EXT_DIRECTORY/$dir
 
   # /data/.noapp2sd (or /data/.nodalvik2sd) disable the appropraite part:
-  if [ $enable -eq 0 -o -e /data/.no${ii}2sd ];
+  if [ $enable -eq 0 -o -e /data/.no${notag}2sd ];
   then
       if [ $enable -ne 0 ];
       then
-          $LOGI "/data/.no${ii}2sd exists, skipped ${ii}2sd..."
+          $LOGI "/data/.no${tag}2sd exists, skipped ${ii}2sd..."
       fi
       # remove symbolic links if they are invalid:
       if [ -h $src -a ! -e $src/. ];
@@ -69,6 +79,23 @@ do
           busybox mkdir $src;
       fi
   else
+      # if requested move dalvik to cache instead of to SD card:
+      if [ "$ii" == "dalvik" -a -e /data/.dalvik2cache ];
+      then
+          # don't move dalkvik to cache if less than 10M available:
+          AVAIL=$( busybox df /cache | busybox tail -n 1 | busybox awk "{ print \$4 }" )
+          if [ $AVAIL -gt 9999 ]; then
+              $LOGI "/data/.dalvik2cache found and $AVAIL kb free on cache so using cache for dalvik-cache :)"
+              trg=/cache/dalvik-cache
+              busybox mkdir -p $trg
+              busybox chown 1000:1000 $trg
+              busybox chmod 771 $trg
+              trg=/cache/dalvik-cache/data
+          else
+              $LOGI "/data/.dalvik2cache found but only $AVAIL kb free on cache so using SD for dalvik-cache :("
+          fi
+      fi
+
       # make sure target exists, create if necessary:
       busybox mkdir -p $trg
       if [ -d $trg ];
